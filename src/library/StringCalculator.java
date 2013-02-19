@@ -15,20 +15,23 @@ public class StringCalculator {
 
     private String[] calculateDelimiter(String input) {
 
-        String[] result = new String[2];
         Pattern delimiterPattern = Pattern.compile("^//.+\\n");
         Matcher delimiterMatcher = delimiterPattern.matcher(input);
+        String delimiter;
+        String stringToParse;
 
         if(delimiterMatcher.find()){
             int positionToParseFrom = delimiterMatcher.end();
-            result[0] = delimiterMatcher.group().substring(2, positionToParseFrom - 1);
-            result[1] = input.substring(positionToParseFrom);
+
+            delimiter = delimiterMatcher.group().substring(2, positionToParseFrom - 1);
+            stringToParse = input.substring(positionToParseFrom);
+            
         }
         else {
-            result[0] = ",|\n";
-            result[1] = input;
+            delimiter = ",|\n";
+            stringToParse = input;
         }
-        
+        String[] result = {delimiter, stringToParse};
         return result;
     }
     public int add(String input){
